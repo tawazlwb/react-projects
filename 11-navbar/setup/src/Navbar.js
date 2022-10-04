@@ -15,21 +15,19 @@ const Navbar = () => {
             <FaBars onClick={() => setShowLinks(!showLinks)} />
           </button>
         </div>
-        {showLinks && (
-          <div className='links-container show-container'>
-            <ul className='links'>
-              {links.map((link) => {
-                const { id, url, text } = link
+        <div className={`links-container ${showLinks && 'show-container'}`}>
+          <ul className='links'>
+            {links.map((link) => {
+              const { id, url, text } = link
 
-                return (
-                  <li key={id}>
-                    <a href={url}>{text}</a>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        )}
+              return (
+                <li key={id}>
+                  <a href={url}>{text}</a>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
 
         <ul className='social-icons'>
           {social.map((socialIcon) => {
