@@ -7,6 +7,7 @@ export const AppPorvider = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(true)
   const [location, setLocation] = useState({})
+  const [page, setPage] = useState({ page: '', links: [] })
 
   const openSidebar = () => {
     setIsSidebarOpen(true)
@@ -17,6 +18,8 @@ export const AppPorvider = ({ children }) => {
   }
 
   const openSubmenu = (text, coordinates) => {
+    const page = sublinks.find((link) => link.page === text)
+    setPage(page)
     setLocation(coordinates)
     setIsSubmenuOpen(true)
   }
@@ -33,7 +36,7 @@ export const AppPorvider = ({ children }) => {
     openSubmenu,
     closeSubmenu,
     location,
-    setLocation,
+    page,
   }
 
   return (
