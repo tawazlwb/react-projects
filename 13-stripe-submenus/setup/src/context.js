@@ -6,6 +6,7 @@ export const Appcontext = React.createContext()
 export const AppPorvider = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(true)
+  const [location, setLocation] = useState({})
 
   const openSidebar = () => {
     setIsSidebarOpen(true)
@@ -15,7 +16,8 @@ export const AppPorvider = ({ children }) => {
     setIsSidebarOpen(false)
   }
 
-  const openSubmenu = () => {
+  const openSubmenu = (text, coordinates) => {
+    setLocation(coordinates)
     setIsSubmenuOpen(true)
   }
 
@@ -25,11 +27,13 @@ export const AppPorvider = ({ children }) => {
 
   const AppContextValue = {
     isSidebarOpen,
-    isSubmenuOpen,
     openSidebar,
-    openSubmenu,
     closeSidebar,
+    isSubmenuOpen,
+    openSubmenu,
     closeSubmenu,
+    location,
+    setLocation,
   }
 
   return (
