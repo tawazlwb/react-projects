@@ -1,5 +1,35 @@
+const updateItemAmount = (state, action) => {
+  let value =
+    action.type === 'INCREASE' ? 1 : action.type === 'DECREASE' ? -1 : 0
+  let tempCartDec = state.cart
+    .map((cartItem) => {
+      if (cartItem.id === action.payload) {
+        return { ...cartItem, amount: cartItem.amount + value }
+      }
+
+      return cartItem
+    })
+    .filter((cartItem) => cartItem.amount > 0)
+
+  return {
+    ...state,
+    cart: tempCartDec,
+  }
+}
+
 const reducer = (state, action) => {
   switch (action.type) {
+    case 'LOADING':
+      return {
+        ...state,
+        loading: true,
+      }
+    case 'DISPLAY_ITEMS':
+      return {
+        ...state,
+        cart: action.payload,
+        loading: false,
+      }
     case 'CLEAR_CART':
       return {
         ...state,
@@ -11,33 +41,8 @@ const reducer = (state, action) => {
         cart: state.cart.filter((item) => item.id !== action.payload),
       }
     case 'INCREASE':
-      let tempCartInc = state.cart.map((cartItem) => {
-        if (cartItem.id === action.payload) {
-          return { ...cartItem, amount: cartItem.amount + 1 }
-        }
-
-        return cartItem
-      })
-
-      return {
-        ...state,
-        cart: tempCartInc,
-      }
     case 'DECREASE':
-      let tempCartDec = state.cart
-        .map((cartItem) => {
-          if (cartItem.id === action.payload) {
-            return { ...cartItem, amount: cartItem.amount - 1 }
-          }
-
-          return cartItem
-        })
-        .filter((cartItem) => cartItem.amount > 0)
-
-      return {
-        ...state,
-        cart: tempCartDec,
-      }
+      return updateItemAmount(state, action)
     case 'GET_TOTALS':
       let { total, amount } = state.cart.reduce(
         (previousCartTotal, cartItem) => {
