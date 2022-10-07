@@ -62,7 +62,7 @@ const reducer = (state, action) => {
         amount,
       }
     default:
-      return state
+      throw new Error(`no matching action [${action.type}]`)
   }
 }
 
