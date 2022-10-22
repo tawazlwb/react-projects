@@ -22,7 +22,7 @@ function App() {
           <Route path='/about'>
             <About />
           </Route>
-          <Route path='/cocktails/:id'>
+          <Route path='/cocktail/:id'>
             <SingleCocktail />
           </Route>
           <Route path='*'>
