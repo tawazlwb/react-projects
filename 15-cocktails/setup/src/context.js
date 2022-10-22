@@ -43,7 +43,7 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     fetchDrinks()
-  }, [])
+  }, [searchTerm])
 
   const initialState = { loading, cocktails, setSearchTerm }
 
