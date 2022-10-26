@@ -22,9 +22,7 @@ function App() {
     const response = await fetch(url)
     const data = await response.json()
     const person = data.results[0]
-    // const { phone, email } = person
-    // const { large: image } = person.picture
-    // const { first, last } = person.name
+
     const {
       phone,
       email,
@@ -47,7 +45,6 @@ function App() {
       name: `${first} ${last}`,
     }
 
-    console.log(newPerson)
     setPerson(newPerson)
     setLoading(false)
     setTile('name')
@@ -59,7 +56,11 @@ function App() {
   }, [])
 
   const handleValue = (e) => {
-    console.log(e.target)
+    if (e.target.classList.contains('icon')) {
+      const newValue = e.target.dataset.label
+      setTile(newValue)
+      setValue(person[newValue])
+    }
   }
 
   return (
